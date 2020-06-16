@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+		<title>Train wireframe</title>
+		<style>
+			.button {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			margin-left: 2px;
+			cursor: pointer;
+			}
+			.button2 {background-color: #008CBA;} /* Blue */
+		</style>
+	</head>
+	<body>
+
+		<script>
+			updateList = function() {
+			var input = document.getElementById('test_image');
+			var output = document.getElementById('fileList');
+			var children = "";
+			for (var i = 0; i < input.files.length; ++i) {
+					children += input.files.item(i).name;
+					}
+					output.innerHTML = children;
+					}
+		</script>
+		<form class="form-horizontal" name="TrainModel" action="test_model" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			{% if next %}
+			<input type="hidden" name="next" value="{{ next }}" />
+			{% endif %}
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>Train wireframe</title>
+				{% load staticfiles %}
+				<link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+				<link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+				<script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+				<div class="container" style="font-size:30px;max-width: 1500px;" align="center">
+					<p style="font-size:40px;color:blue;"> Test wireframe</p><br>
+						<table border="1" align="center" width="800">
+							<tr> <td>&nbsp;
+								<p style="font-size:30px;color:purple;">&nbsp; Test the model – Upload images </p>
+
+								<div class="row">
+									<div class="col-xs-6 col-sm-6 col-lg-7">
+										<p style="font-size:30px;color:green;">&nbsp; Image</p>
+									</div>
+
+									<div class="col-xs-6 col-sm-6 col-lg-5">
+										<div class="btn-group" style="font-size:20px; margin-top: 10px;"><p style="font-size:20px;color:white;">
+												<textarea id="fileList" class="btn btn-default" readonly></textarea>&nbsp;
+												<label class="btn btn-primary" style="margin-left: 10px; font-size:20px">
+													&nbsp;Browse&nbsp; <input type="file" name="test_image" id="test_image" style="display: none;" onchange="javascript:updateList()"/> </p>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-3 col-sm-3 col-lg-3"></div>
+									<div class="col-xs-9 col-sm-9 col-lg-9">
+										{% if img_model %}
+										<div align="center" class="img-thumbnail">
+											<img src="{{ img_model.image.url }}" height="400" width="450">
+										</div>
+											{% endif %}
+									</div>
+								</div>
+								<div class="row"><br>
+									<div class="col-lg-5 col-sm-5 col-2" align="right" style="font-size:20px;">
+
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<button type="submit"  class="button button2">Test</button>
+											{% if messages %}
+											{% for message in messages %}
+											{% if message.tags == 'success' %}
+									</div>
+									<div class="col-lg-7 col-sm-5 col-10" style="font-size:20px;">
+												<p class="text-danger">{{ message }}</p>
+
+											{% endif %}
+											{% endfor %}
+											{% endif %}
+									</div>
+								 </div>
+
+								</td>
+							</tr>
+								<tr>
+									<td>
+										{% if messages %}
+										{% for message in messages %}
+										{% if message.tags == 'warning' %}
+										<div class="alert alert-warning" style="font-size:20px; margin-top: 20px;" align="center">
+											{{ message }}
+										</div>
+										{% endif %}
+										{% endfor %}
+										{% endif %}
+
+										{% if messages %}
+										{% for message in messages %}
+										{% if message.tags == 'error' %}
+										<p style="...">
+											<div class="alert alert-error" style="font-size:20px; margin-top: 20px;" align="center">
+												<b>{% for message in messages %}{{ message }} {% endfor %}</b>
+											</div>
+										</p>
+										{% endif %}
+										{% endfor %}
+										{% endif %}
+									</td>
+
+								</tr>
+							</table>
+						</div>
+					</form>
+				</body>
+			</html>

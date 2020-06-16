@@ -1,0 +1,7 @@
+del /q "D:\Users\125443\PycharmProjects\Prj2\media\train\clean\*.*"
+del /q "D:\Users\125443\PycharmProjects\Prj2\media\train\messy\*.*"
+del /q "D:\Users\125443\PycharmProjects\Prj2\media\train\notcr\*.*"
+del /q "D:\Users\125443\PycharmProjects\Prj2\media\validate\clean\*.*"
+del /q "D:\Users\125443\PycharmProjects\Prj2\media\validate\messy\*.*"
+del /q "D:\Users\125443\PycharmProjects\Prj2\media\validate\notcr\*.*"
+echo "file removed"

@@ -1,0 +1,39 @@
+
+{% csrf_token %}
+{% block content %}
+
+
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+            <p>
+                <a class="navbar-brand">CNN Image Processing</a>
+            </p>
+        </div>
+      </div>
+    </nav>
+
+    <div id="login">
+        <form action="success_page" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+            <p>
+                <b>Image file uploaded.</b>
+            </p>
+
+            <input type="submit" value="Upload another Image." />
+        </form>
+    </div>
+
+    <div id="login">
+        <form action="logout" method="get" enctype="multipart/form-data">{% csrf_token %}
+            <br><br><input type="submit" value="Logout" />
+        </form>
+    </div>
+
+<br><br>
+{% if messages %}
+<div>
+<p style="color:blue;"> <b>List of Uploaded Files:</b> <br> {% for message in messages %}{{ message|safe }} {% endfor %}</p>
+{% endif %}
+</div>
+{% endblock %}

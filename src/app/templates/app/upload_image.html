@@ -1,0 +1,38 @@
+
+{% csrf_token %}
+{% block content %}
+
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">CNN Image Processing</a>
+        </div>
+      </div>
+    </nav>
+
+    <div id="login">
+        <form class="form-horizontal" name="UploadImage" action="process_image" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}" />
+        {% endif %}
+        <div class="caption">
+            <h5>Upload CNN Conference Room Image</h5>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <p style="text-indent :8em;" > <input type="file" name="fileToUpload" id="fileToUpload"></p>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+            </div>
+
+                <p style="text-indent :8em;" > <button type="submit">Upload Image</button> </p>
+            </div>
+        </div>
+        </form>
+    </div>
+
+{% endblock %}

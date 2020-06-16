@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Train wireframe</title>
+    <style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-left: 420px;
+  cursor: pointer;
+}
+.button2 {background-color: #008CBA;} /* Blue */
+</style>
+</head>
+<body>
+
+<script>
+    updateList = function(imagetype) {
+    if(imagetype == 'clean') {
+        fl = 'clean_files'
+        flist = 'clean_filelist'
+    }
+    if(imagetype == 'messy') {
+        fl = 'messy_files'
+        flist = 'messy_filelist'
+    }
+    if(imagetype == 'nocr') {
+        fl = 'nocr_files'
+        flist = 'nocr_filelist'
+    }
+    var input = document.getElementById(fl);
+    var output = document.getElementById(flist);
+    var children = "";
+    for (var i = 0; i < input.files.length; ++i) {
+        children += input.files.item(i).name + ', ';
+    }
+    output.innerHTML = children;
+}
+</script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train wireframe</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+<form class="form-horizontal" name="TrainModel" action="train_model" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             {{ form.as_p }}
+             {% if next %}
+             <input type="hidden" name="next" value="{{ next }}" />
+             {% endif %}
+<div class="container" style="font-size:30px;max-width: 1500px;" align="center">
+    <p style="font-size:40px;color:blue;"> Train wireframe </p><br>
+     <table border="1" align="center" width="800">
+        <tr> <td>
+            <p style="font-size:30px;color:purple;">&nbsp;Train the model – Upload images</p>
+        <div class="row">
+        <div class="col-lg-6 col-sm-6 col-12"> &nbsp;
+        </div><div class="col-lg-6 col-sm-6 col-12"></div></div>
+        <div class="row">
+        <div class="col-lg-6 col-sm-6 col-12">
+            <p style="font-size:30px;color:green;">&nbsp;Conference Room - Clean</p>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-12">
+            <div class="btn-group" style="font-size:20px; margin-top: 10px;">
+                <textarea id="clean_filelist" class="btn btn-default" readonly></textarea>&nbsp;
+                <label class="btn btn-primary" style="margin-left: 10px; font-size:20px">
+                     &nbsp;Browse&nbsp; <input type="file" multiple name="clean_files" id="clean_files" style="display: none;"
+                                              onchange="javascript:updateList('clean')"/>
+                </label>
+            </div>
+
+        </div>
+            </div>
+                             <div class="row">
+        <div class="col-lg-6 col-sm-6 col-12">
+            <p style="font-size:30px;color:green;">&nbsp;Conference Room - Messy</p>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-12">
+            <div class="btn-group" style="font-size:20px; margin-top: 10px;">
+                <textarea id="messy_filelist" class="btn btn-default" readonly></textarea>&nbsp;
+                <label class="btn btn-primary" style="margin-left: 10px; font-size:20px">
+                     &nbsp;Browse&nbsp; <input type="file" multiple name="messy_files" id="messy_files" style="display: none;"
+                                              onchange="javascript:updateList('messy')"/>
+                </label>
+            </div>
+        </div>
+            </div>
+
+                      <div class="row">
+        <div class="col-lg-6 col-sm-6 col-12">
+            <p style="font-size:30px;color:green;">&nbsp;Not Conference Room</p>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-12">
+            <div class="btn-group" style="font-size:20px; margin-top: 10px;">
+                <textarea id="nocr_filelist" class="btn btn-default" readonly></textarea>&nbsp;
+                <label class="btn btn-primary" style="margin-left: 10px; font-size:20px">
+                     &nbsp;Browse&nbsp; <input type="file" multiple name="nocr_files" id="nocr_files" style="display: none;"
+                                              onchange="javascript:updateList('nocr')"/>
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-12">
+             <div align="center">
+                <button type="submit" class="button button2">Train</button>
+            </div>
+            <div class="row"></div>
+        </div>
+</div>
+
+  </td></tr>
+   <tr>
+        <td >
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'warning' %}
+                            <div class="alert alert-warning" style="font-size:20px; margin-top: 20px;" align="center">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-success" style="font-size:20px; margin-top: 20px;" align="center">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <p style="...">
+                                <div class="alert alert-error" style="font-size:20px; margin-top: 20px;" align="center">
+                                    <b>{% for message in messages %}{{ message }} {% endfor %}</b>
+                                </div>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+        </td>
+
+    </tr>
+</table>
+</div>
+</form>
+</body>
+</html>
