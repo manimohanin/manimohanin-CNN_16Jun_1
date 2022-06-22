@@ -58,7 +58,7 @@ matplotlib==3.0.3
 mock==3.0.5
 msrest==0.6.11
 msrestazure==0.6.2
-numpy==1.14.4
+numpy==1.22.0
 oauthlib==3.1.0
 opencv-python==4.1.0.25
 pandas==0.24.2
